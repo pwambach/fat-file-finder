@@ -8,14 +8,14 @@ import FileItem from '../components/FileItem';
 class App extends Component {
 
   render() {
-    const { path, content, dispatch } = this.props;
+    const { path, files, dispatch } = this.props;
     const actions = bindActionCreators(Actions, dispatch);
 
     return (
       <div>
-        <DirectoryBar path={path} onSetPath={actions.setPath}/>
-        {path}
-        <ul>{content.map(file => <FileItem path={file.path} size={file.size} onSetPath={actions.setPath} key={file.path} />)}</ul>
+        <DirectoryBar path={path} onSetPath={actions.updateTree}/>
+        {path} - {files.length} Files
+        <ul>{files.map(file => <FileItem path={file.path} size={file.size} onSetPath={actions.updateTree} key={file.path} />)}</ul>
       </div>
     );
   }
@@ -23,14 +23,14 @@ class App extends Component {
 
 App.propTypes = {
   path: PropTypes.string.isRequired,
-  content: PropTypes.array.isRequired,
+  files: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired
 };
 
 function transformState(state) {
   return {
     path: state.directory.path,
-    content: state.directory.content
+    files: state.directory.files
   };
 }
 

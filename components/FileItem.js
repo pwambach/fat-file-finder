@@ -8,7 +8,7 @@ class FileItem extends Component {
 
   render() {
     const { onSetPath } = this.props;
-    return <li onClick={this.handleClick.bind(this, this.props.path)}>{this.props.path} {this.props.size}</li>;
+    return <li onClick={this.handleClick.bind(this, this.props.path)}>{this.props.path} {Math.round(this.props.size / 1024)} kB</li>;
   }
 }
 
