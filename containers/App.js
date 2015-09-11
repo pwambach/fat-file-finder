@@ -4,18 +4,28 @@ import { connect } from 'react-redux';
 import * as Actions from '../actions/actions';
 import DirectoryBar from '../components/DirectoryBar';
 import FileItem from '../components/FileItem';
+import SliderInput from '../components/SliderInput';
+
+var filesize = require('filesize');
 
 class App extends Component {
 
   render() {
-    const { path, files, dispatch } = this.props;
+    const { path, files, minSize, dispatch } = this.props;
     const actions = bindActionCreators(Actions, dispatch);
+    const filteredFiles = files.filter(file => file.size > minSize);
 
     return (
       <div>
-        <DirectoryBar path={path} onSetPath={actions.updateTree}/>
-        {path} - {files.length} Files
-        <ul>{files.map(file => <FileItem path={file.path} size={file.size} onSetPath={actions.updateTree} key={file.path} />)}</ul>
+        <DirectoryBar path={path} onSetPath={actions.updateTree} />
+
+        <div className="FileCount">{filteredFiles.length} Files</div>
+
+        <SliderInput onUpdate={actions.setMinSize} value={minSize}/>MB
+
+        <ul className="FileList">
+          {filteredFiles.map(file => <FileItem path={file.path} size={filesize(file.size)} onSetPath={actions.updateTree} key={file.path} />)}
+        </ul>
       </div>
     );
   }
@@ -30,7 +40,8 @@ App.propTypes = {
 function transformState(state) {
   return {
     path: state.directory.path,
-    files: state.directory.files
+    files: state.directory.files,
+    minSize: state.directory.minSize
   };
 }
 

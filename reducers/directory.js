@@ -1,32 +1,38 @@
-import { SET_PATH, SUCCESS_WALK_TREE } from '../constants/ActionTypes';
+import * as types from '../constants/ActionTypes';
 
 const initialState = {
-  path: '/Users/phil/Downloads/sample',
+  path: '/Users/phil/Downloads',
+  minSize: 10*1024*1024,
   files: [
     {
       path: '/Users/phil/Downloads/a.txt',
       size: 123,
-      directory: false
+      dir: false
     },
     {
       path: '/Users/phil/Downloads/page.pdf',
-      size: 234,
-      directory: false
+      size: 111234,
+      dir: false
     },
     {
       path: '/Users/phil/Downloads/another_directory',
       size: 0,
-      directory: true
+      dir: true
     }
   ]
 };
 
 export default function directory(state = initialState, action) {
   switch (action.type) {
-    case SET_PATH:
+    case types.START_WALK_TREE:
       return Object.assign({}, state, {path: action.path})
-    case SUCCESS_WALK_TREE:
+    case types.SUCCESS_WALK_TREE:
       return Object.assign({}, state, {files: action.files})
+    case types.ERROR_WALK_TREE:
+      console.error(action.error);
+      return state;
+    case types.SET_MIN_SIZE:
+      return Object.assign({}, state, {minSize: action.minSize});
 
   default:
     return state;

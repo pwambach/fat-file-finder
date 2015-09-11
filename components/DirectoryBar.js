@@ -30,10 +30,10 @@ class DirectoryBar extends Component {
   render() {
     const { onSetPath } = this.props;
     return (
-      <section>
+      <div className="DirectoryBar">
         <input type="text" value={this.state.path} onChange={this.handleChange.bind(this)} onKeyDown={this.handleEnter.bind(this)} />
         <button onClick={this.handleClick.bind(this)}>Go</button>
-      </section>
+      </div>
     );
   }
 }

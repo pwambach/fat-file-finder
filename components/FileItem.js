@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+var path = require('path');
 
 class FileItem extends Component {
 
@@ -8,13 +9,18 @@ class FileItem extends Component {
 
   render() {
     const { onSetPath } = this.props;
-    return <li onClick={this.handleClick.bind(this, this.props.path)}>{this.props.path} {Math.round(this.props.size / 1024)} kB</li>;
+    return (
+      <li className="FileItem" onClick={this.handleClick.bind(this, this.props.path)}>
+        <span className="FileName">{path.basename(this.props.path)}</span>
+        <span className="FileSize">{this.props.size}</span>
+      </li>
+    );
   }
 }
 
 FileItem.propTypes = {
   path: PropTypes.string.isRequired,
-  size: PropTypes.number.isRequired,
+  size: PropTypes.string.isRequired,
   onSetPath: PropTypes.func.isRequired
 };
 

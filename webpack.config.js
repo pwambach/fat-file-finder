@@ -15,7 +15,7 @@ module.exports = {
   },
   plugins: [
     //new webpack.HotModuleReplacementPlugin(),
-    new webpack.IgnorePlugin(new RegExp("^(fs|ipc)$"))
+    new webpack.IgnorePlugin(new RegExp("^(fs|ipc|path)$"))
   ],
   module: {
     loaders: [{
@@ -24,8 +24,8 @@ module.exports = {
       exclude: /node_modules/,
       include: __dirname
     }, {
-      test: /\.css?$/,
-      loaders: ['style', 'raw'],
+      test: /\.scss?$/,
+      loaders: ['style', 'css', 'sass'],
       exclude: /node_modules/,
       include: __dirname
     }]

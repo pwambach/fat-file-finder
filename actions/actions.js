@@ -5,8 +5,8 @@ function setPath(path) {
   return { type: types.SET_PATH, path };
 }
 
-function start_walk_tree() {
-  return { type: types.START_WALK_TREE };
+function start_walk_tree(path) {
+  return { type: types.START_WALK_TREE, path };
 }
 
 function success_walk_tree(files) {
@@ -20,16 +20,18 @@ function error_walk_tree(error) {
   return { type: types.ERROR_WALK_TREE, error: error };
 }
 
-export function updateTree(path, minSize = 0) {
+export function updateTree(path) {
   return function(dispatch){
-    dispatch(setPath(path));
-    dispatch(start_walk_tree());
+    dispatch(start_walk_tree(path));
 
     return promiseWalk(path)
-      .then(files => files.filter( file => file.size > minSize ))
       .then(
         files => dispatch(success_walk_tree(files)),
-        () => dispatch(error_walk_tree(error))
+        error => dispatch(error_walk_tree(error))
       );
   }
+}
+
+export function setMinSize(minSize) {
+  return {type: types.SET_MIN_SIZE, minSize: minSize};
 }
