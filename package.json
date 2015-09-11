@@ -1,0 +1,25 @@
+{
+  "name": "XXX",
+  "version": "0.0.0",
+  "description": "XXX",
+  "main": "main.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "react": "^0.13.3",
+    "react-redux": "^1.0.1",
+    "redux": "^1.0.1"
+  },
+  "devDependencies": {
+    "babel-core": "^5.8.23",
+    "babel-loader": "^5.3.2",
+    "raw-loader": "^0.5.1",
+    "react-hot-loader": "^1.3.0",
+    "style-loader": "^0.12.3",
+    "webpack": "^1.12.1",
+    "webpack-dev-server": "~1.10.1",
+    "classnames": "~2.1.3"
+  }
+}
