@@ -13,13 +13,13 @@ import FileTable from '../components/FileTable';
 class App extends Component {
 
   render() {
-    const { path, files, minSize, dispatch } = this.props;
+    const { path, files, minSize, loading, dispatch } = this.props;
     const actions = bindActionCreators(Actions, dispatch);
     const filteredFiles = files.filter( (file, index) => file.size > minSize && index < 100);
 
     return (
-      <div>
-        <DirectoryBar path={path} onSetPath={actions.updateTree} onBack={actions.rewindTree}/>
+      <div className="Root">
+        <DirectoryBar path={path} onSetPath={actions.updateTree} onBack={actions.rewindTree} loading={loading}/>
 
         <div className="Additional">
           <SliderInput onUpdate={actions.setMinSize} value={minSize}/>
@@ -28,13 +28,13 @@ class App extends Component {
         </div>
 
         <FileTable files={filteredFiles} actions={actions}/>
+        
       </div>
     );
   }
 }
 
 App.propTypes = {
-  path: PropTypes.string.isRequired,
   files: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired
 };
@@ -43,7 +43,8 @@ function transformState(state) {
   return {
     path: state.directory.path,
     files: state.directory.files,
-    minSize: state.directory.minSize
+    minSize: state.directory.minSize,
+    loading: state.directory.loading
   };
 }
 

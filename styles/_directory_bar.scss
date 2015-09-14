@@ -14,12 +14,12 @@ $backButtonWidth: 40px;
       outline: none;
     }
   }
-  
+
   input {
     box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
     color: #777;
     width: 100%;
-    padding: 0 90px 0 90px;
+    padding: 0 90px 0 96px;
     transition: all 0.4s ease-in-out;
     &:focus {
       outline: none;
@@ -48,11 +48,12 @@ $backButtonWidth: 40px;
 
   .BackButton {
     left: 0;
-    padding: 0 15px;
+    padding: 0 14px;
   }
 
   .DialogButton {
-    left: $backButtonWidth;
+    left: $backButtonWidth + 6px;
+    padding-right: 12px;
   }
 
   .OkButton {
@@ -62,7 +63,7 @@ $backButtonWidth: 40px;
     width: $button-width;
 
     &:hover {
-      background-color: lighten($primaryColor, 8);
+      background-color: lighten($primaryColor, 12);
     }
 
     &:active {
@@ -71,6 +72,15 @@ $backButtonWidth: 40px;
 
     &:focus {
       outline: none;
+    }
+
+    .fa-cog {
+      font-size: 120%;
+    }
+
+    .fa-arrow-right {
+      position: relative;
+      top: -1px;
     }
   }
 }

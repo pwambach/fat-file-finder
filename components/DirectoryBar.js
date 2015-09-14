@@ -43,22 +43,24 @@ class DirectoryBar extends Component {
   }
 
   render() {
-    const { onSetPath } = this.props;
+    const { onSetPath, loading } = this.props;
     return (
       <div className="DirectoryBar">
-        <button className="BackButton" onClick={this.handleBack.bind(this)}>-</button>
-        <button className="DialogButton" onClick={this.handleDialog}>...</button>
+        <button className="BackButton" onClick={this.handleBack.bind(this)}><i className="fa fa-arrow-left"></i></button>
+        <button className="DialogButton" onClick={this.handleDialog}><i className="fa fa-search"></i></button>
         <input type="text" value={this.state.path} onChange={this.handleChange.bind(this)} onKeyDown={this.handleEnter.bind(this)} placeholder="Select a directory"/>
-        <button className="OkButton" onClick={this.handleClick.bind(this)}>Go</button>
+        <button className="OkButton" onClick={this.handleClick.bind(this)}>
+          {loading ? (<i className="fa fa-cog fa-spin"></i>) : (<i className="fa fa-arrow-right"></i>)}
+        </button>
       </div>
     );
   }
 }
 
 DirectoryBar.propTypes = {
-  path: PropTypes.string.isRequired,
   onSetPath: PropTypes.func.isRequired,
-  onBack: PropTypes.func.isRequired
+  onBack: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired
 };
 
 

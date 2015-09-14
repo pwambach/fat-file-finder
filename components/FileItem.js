@@ -3,7 +3,8 @@ var pathNpm = electronRequire('path');
 
 class FileItem extends Component {
 
-  handleClick(path) {
+  handleDirectoryClick(path, e) {
+    e.preventDefault();
     this.props.onSetPath(path);
   }
 
@@ -11,11 +12,17 @@ class FileItem extends Component {
     const { size, relativeSize, path, onSetPath } = this.props;
     const style = {width: relativeSize + '%'};
     return (
-      <tr className="FileItem" onClick={this.handleClick.bind(this, path)}>
+      <tr className="FileItem">
         <td className="FileType">
           <div>{pathNpm.extname(path)}</div>
         </td>
-        <td className="FileName">{pathNpm.basename(path)}</td>
+        <td className="FileName">
+          {pathNpm.basename(path)}
+          <div className="DirectoryName"
+               onClick={this.handleDirectoryClick.bind(this, pathNpm.dirname(path))}>
+            {pathNpm.dirname(path)}
+          </div>
+        </td>
         <td className="FileSizeBar">
           <div>
             <div style={style}>

@@ -6,6 +6,7 @@ import { DevTools, DebugPanel, LogMonitor } from 'redux-devtools/lib/react';
 import App from './containers/App';
 import configureStore from './store/configureStore';
 import './styles/main.scss';
+import './node_modules/font-awesome/css/font-awesome.min.css';
 
 
 const store = configureStore();

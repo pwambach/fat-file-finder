@@ -14,7 +14,8 @@
     "walker": "~1.0.7",
     "redux-logger": "~1.0.6",
     "filesize": "~3.1.3",
-    "path": "~0.11.14"
+    "path": "~0.11.14",
+    "font-awesome": "~4.4.0"
   },
   "devDependencies": {
     "babel-core": "^5.8.23",
@@ -32,6 +33,8 @@
     "node-sass": "~3.3.2",
     "sass-loader": "~2.0.1",
     "css-loader": "~0.18.0",
-    "redux-devtools": "~2.1.2"
+    "redux-devtools": "~2.1.2",
+    "file-loader": "~0.8.4",
+    "url-loader": "~0.5.6"
   }
 }
