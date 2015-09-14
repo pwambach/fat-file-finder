@@ -20,8 +20,8 @@ class SliderInput extends Component {
   render() {
     return (
       <span className="SliderInput">
-        <input type="range" min="0" max="200" defaultValue={this.state.value} onChange={this.handleChange.bind(this)} />
-        { this.state.value }
+        <span>Show only &gt;</span> <span className="SliderValue">{this.state.value + ' MB'}</span>
+        <input type="range" min="1" max="200" defaultValue={this.state.value} onChange={this.handleChange.bind(this)} />
       </span>
       );
   }

@@ -3,29 +3,31 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as Actions from '../actions/actions';
 import DirectoryBar from '../components/DirectoryBar';
-import FileItem from '../components/FileItem';
 import SliderInput from '../components/SliderInput';
+import FileCount from '../components/FileCount';
+import FileTable from '../components/FileTable';
 
-var filesize = require('filesize');
+
+
 
 class App extends Component {
 
   render() {
     const { path, files, minSize, dispatch } = this.props;
     const actions = bindActionCreators(Actions, dispatch);
-    const filteredFiles = files.filter(file => file.size > minSize);
+    const filteredFiles = files.filter( (file, index) => file.size > minSize && index < 100);
 
     return (
       <div>
         <DirectoryBar path={path} onSetPath={actions.updateTree} />
 
-        <div className="FileCount">{filteredFiles.length} Files</div>
+        <div className="Additional">
+          <SliderInput onUpdate={actions.setMinSize} value={minSize}/>
+          <FileCount count={files.length}/>
+          <span className="ShowingFileCount"> (Showing: {filteredFiles.length})</span>
+        </div>
 
-        <SliderInput onUpdate={actions.setMinSize} value={minSize}/>MB
-
-        <ul className="FileList">
-          {filteredFiles.map(file => <FileItem path={file.path} size={filesize(file.size)} onSetPath={actions.updateTree} key={file.path} />)}
-        </ul>
+        <FileTable files={filteredFiles} actions={actions}/>
       </div>
     );
   }

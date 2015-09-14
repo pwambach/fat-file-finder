@@ -1,0 +1,76 @@
+$backButtonWidth: 40px;
+
+.DirectoryBar {
+
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+
+  input, button {
+    height: $directory-bar-height;
+    font-size: 16px;
+    border: none;
+    &:focus {
+      outline: none;
+    }
+  }
+  
+  input {
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+    color: #777;
+    width: 100%;
+    padding: 0 90px 0 90px;
+    transition: all 0.4s ease-in-out;
+    &:focus {
+      outline: none;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+    }
+  }
+
+  button {
+    position: absolute;
+    top: 0;
+  }
+
+  .BackButton, .DialogButton {
+    height: $directory-bar-height - 20px;
+    padding: 0 10px;
+    margin: 10px 0;
+    color: #777;
+    border-right: 1px solid rgba(0,0,0,0.05);
+    background-color: transparent;
+    text-align: center;
+
+    &:hover {
+      color: lighten($primaryColor, 20);
+    }
+  }
+
+  .BackButton {
+    left: 0;
+    padding: 0 15px;
+  }
+
+  .DialogButton {
+    left: $backButtonWidth;
+  }
+
+  .OkButton {
+    right: 0;
+    background-color: lighten($primaryColor, 6);
+    color: white;
+    width: $button-width;
+
+    &:hover {
+      background-color: lighten($primaryColor, 8);
+    }
+
+    &:active {
+      background-color: lighten($primaryColor, 4);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

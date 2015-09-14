@@ -1,5 +1,5 @@
+var Q = require('q');
 var walker = electronRequire('walker');
-var Q = electronRequire('q');
 
 module.exports = function promiseWalk(path) {
   let entries = [];

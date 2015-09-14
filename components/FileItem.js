@@ -1,5 +1,5 @@
 import React, { PropTypes, Component } from 'react';
-var path = require('path');
+var pathNpm = electronRequire('path');
 
 class FileItem extends Component {
 
@@ -8,12 +8,22 @@ class FileItem extends Component {
   }
 
   render() {
-    const { onSetPath } = this.props;
+    const { size, relativeSize, path, onSetPath } = this.props;
+    const style = {width: relativeSize + '%'};
     return (
-      <li className="FileItem" onClick={this.handleClick.bind(this, this.props.path)}>
-        <span className="FileName">{path.basename(this.props.path)}</span>
-        <span className="FileSize">{this.props.size}</span>
-      </li>
+      <tr className="FileItem" onClick={this.handleClick.bind(this, path)}>
+        <td className="FileType">
+          <div>{pathNpm.extname(path)}</div>
+        </td>
+        <td className="FileName">{pathNpm.basename(path)}</td>
+        <td className="FileSizeBar">
+          <div>
+            <div style={style}>
+              <span className="FileSize">{size}</span>
+            </div>
+          </div>
+        </td>
+      </tr>
     );
   }
 }
@@ -21,6 +31,7 @@ class FileItem extends Component {
 FileItem.propTypes = {
   path: PropTypes.string.isRequired,
   size: PropTypes.string.isRequired,
+  relativeSize: PropTypes.number.isRequired,
   onSetPath: PropTypes.func.isRequired
 };
 

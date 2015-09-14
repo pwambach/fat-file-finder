@@ -1,4 +1,5 @@
 import React, { PropTypes, Component } from 'react';
+var ipc = electronRequire('ipc');
 
 class DirectoryBar extends Component {
 
@@ -7,6 +8,12 @@ class DirectoryBar extends Component {
     this.state = {
       path: this.props.path || ''
     };
+
+    ipc.on('open-dir-dialog-reply', function(dirPath) {
+      if(dirPath){
+        props.onSetPath(dirPath[0]);
+      }
+    });
   }
 
   componentWillReceiveProps(nextProps) {
@@ -27,12 +34,22 @@ class DirectoryBar extends Component {
     this.setState({path: e.target.value});
   }
 
+  handleDialog(){
+    ipc.send('open-dir-dialog');
+  }
+
+  handleBack(){
+    console.log("back");
+  }
+
   render() {
     const { onSetPath } = this.props;
     return (
       <div className="DirectoryBar">
+        <button className="BackButton" onClick={this.handleBack}>-</button>
+        <button className="DialogButton" onClick={this.handleDialog}>...</button>
         <input type="text" value={this.state.path} onChange={this.handleChange.bind(this)} onKeyDown={this.handleEnter.bind(this)} />
-        <button onClick={this.handleClick.bind(this)}>Go</button>
+        <button className="OkButton" onClick={this.handleClick.bind(this)}>Go</button>
       </div>
     );
   }

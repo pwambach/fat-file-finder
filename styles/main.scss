@@ -1,5 +1,22 @@
-$backgroundColor: #e5e5e5;
-$primaryColor: #579ECE;
+$backgroundColor: #efefef;
+$primaryColor: lighten(#33626D, 4);
+$directory-bar-height: 50px;
+$row-height: 50px;
+$black-font-color: #333;
+$gray-font-color: #777;
+
+$button-width: 70px;
+
+@mixin lightenIterator($color, $index, $step) {
+  @if $index*$step < 100 {
+    background-color: lighten($color, $index*$step);
+  } @else {
+    background-color: lighten($color, 100);
+  }
+}
+
+@import './slider';
+
 
 * {
   box-sizing: border-box;
@@ -8,88 +25,129 @@ $primaryColor: #579ECE;
 body {
   background: $backgroundColor;
   padding: 40px;
-  font-size: 20px;
+  font-size: 14px;
   font-family: Helvetica Neue, Arial;
   font-weight: 200;
-  font-color: #333;
+  font-color: $black-font-color;
 }
+
 
 .FileSizeApp {
 
-  .DirectoryBar {
+  @import './directory_bar';
+  
+  .Additional {
 
-    position: relative;
-    width: 100%;
-    margin-bottom: 40px;
-
-    input, button {
-      height: 50px;
-      font-size: 16px;
-      border: none;
-    }
-    input {
-      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
-      color: #777;
-      width: 100%;
-      padding: 0 6px 0 14px;
-      transition: all 0.4s ease-in-out;
-      &:focus {
-        outline: none;
-        box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-      }
-    }
-    button {
-      position: absolute;
-      top:0;
-      right: 0;
-      background-color: $primaryColor;
-      color: white;
-      width: 70px;
-
-      &:hover {
-        background-color: darken($primaryColor, 5);
-      }
-
-      &:active {
-        background-color: lighten($primaryColor, 2);
-      }
-
-      &:focus {
-        outline: none;
-      }
-    }
-  }
-
-  .FileCount {
     text-align: right;
-    color: #777;
+    margin-right: $button-width;
+    color: $gray-font-color;
+
+    .SliderInput {
+      input, span {
+        vertical-align: middle;
+      }
+      input {
+        position: relative;
+        top: 1px;
+        margin-left: 4px;
+        margin-right: 4px;
+      }
+      .SliderValue {
+        display: inline-block;
+        min-width: 48px;
+      }
+    }
+
+    .FileCount, .ShowingFileCount {
+      text-align: right;
+    }
+
+    .FileCount {
+      padding-left: 20px;
+    }
+
+    .ShowingFileCount {
+      color: lighten($gray-font-color, 20);
+    }
   }
 
-  .SliderInput {
 
-  }
 
   .FileList {
 
     list-style: none;
-    margin: 30px 0 0 0;
+    margin: 40px 0 0 0;
     padding: 0;
+    border: none;
+    /*border-collapse:collapse;*/
 
+    th, td, tr {
+      border: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    thead {
+      display:none;
+    }
+
+    thead td {
+      color: $gray-font-color;
+      padding-bottom: 20px;
+    }
 
     .FileItem {
-      font-size: 14px;
-      margin-bottom: 10px;
-      clear: both;
+
+      .FileType {
+        padding-right: 30px;
+
+        > div {
+          background-color: darken($primaryColor, 5);
+          border-radius: 50%;
+          color: white;
+          height: 30px;
+          width: 30px;
+        }
+      }
 
       .FileName {
-
+        max-width: 300px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-right: 40px;
       }
 
-      .FileSize {
-        color: $primaryColor;
-        float:right;
-        font-weight: bold;
+      .FileSizeBar {
+        width: 100%;
+        padding-right: 66px;
+
+        > div {
+          > div {
+            background-color: $primaryColor;
+            box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            height: $row-height;
+            transition: all 0.5s ease-out;
+            text-align: right;
+          }
+        }
+
+        .FileSize {
+          color: $black-font-color;
+          font-weight: 500;
+          white-space: nowrap;
+          position: relative;
+          top: 14px;
+          right: -64px;
+        }
       }
+
+      @for $i from 1 through 100 {
+        &:nth-child(#{$i}) .FileSizeBar > div > div {
+          @include lightenIterator($primaryColor, $i, 2);
+        }
+      }
+
     }
   }
 }

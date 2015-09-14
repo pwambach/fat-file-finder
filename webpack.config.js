@@ -15,7 +15,7 @@ module.exports = {
   },
   plugins: [
     //new webpack.HotModuleReplacementPlugin(),
-    new webpack.IgnorePlugin(new RegExp("^(fs|ipc|path)$"))
+    new webpack.IgnorePlugin(new RegExp("^(dialog|path|fs|ipc|path)$"))
   ],
   module: {
     loaders: [{

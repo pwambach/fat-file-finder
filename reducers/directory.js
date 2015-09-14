@@ -2,7 +2,7 @@ import * as types from '../constants/ActionTypes';
 
 const initialState = {
   path: '/Users/phil/Downloads',
-  minSize: 10*1024*1024,
+  minSize: 1*1024*1024,
   files: [
     {
       path: '/Users/phil/Downloads/a.txt',
