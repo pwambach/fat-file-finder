@@ -1,7 +1,8 @@
 import * as types from '../constants/ActionTypes';
 
 const initialState = {
-  path: '/Users/phil/Downloads',
+  lastPaths: [],
+  path: null,
   minSize: 1*1024*1024,
   files: [
     {
@@ -25,9 +26,13 @@ const initialState = {
 export default function directory(state = initialState, action) {
   switch (action.type) {
     case types.START_WALK_TREE:
-      return Object.assign({}, state, {path: action.path})
+      if(state.lastPaths[state.lastPaths.length-1] === action.path){
+        state.lastPaths.pop();
+        return Object.assign({}, state, {path: action.path, lastPaths: [...state.lastPaths]});
+      }
+      return Object.assign({}, state, {path: action.path, lastPaths: [...state.lastPaths, state.path]});
     case types.SUCCESS_WALK_TREE:
-      return Object.assign({}, state, {files: action.files})
+      return Object.assign({}, state, {files: action.files});
     case types.ERROR_WALK_TREE:
       console.error(action.error);
       return state;

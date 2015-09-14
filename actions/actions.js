@@ -1,10 +1,6 @@
 import * as types from '../constants/ActionTypes';
 var promiseWalk = require ('../utils/PromiseWalker');
 
-function setPath(path) {
-  return { type: types.SET_PATH, path };
-}
-
 function start_walk_tree(path) {
   return { type: types.START_WALK_TREE, path };
 }
@@ -20,15 +16,30 @@ function error_walk_tree(error) {
   return { type: types.ERROR_WALK_TREE, error: error };
 }
 
+function getFilesAsync(dispatch, path){
+  dispatch(start_walk_tree(path));
+
+  return promiseWalk(path)
+    .then(
+      files => dispatch(success_walk_tree(files)),
+      error => dispatch(error_walk_tree(error))
+    );
+}
+
 export function updateTree(path) {
   return function(dispatch){
-    dispatch(start_walk_tree(path));
+    return getFilesAsync(dispatch, path);
+  }
+}
 
-    return promiseWalk(path)
-      .then(
-        files => dispatch(success_walk_tree(files)),
-        error => dispatch(error_walk_tree(error))
-      );
+export function rewindTree() {
+  return function(dispatch, getState){
+    let path = getState().directory.lastPaths.pop();
+    if(path){
+      return getFilesAsync(dispatch, path);
+    } else {
+      return false;
+    }
   }
 }
 

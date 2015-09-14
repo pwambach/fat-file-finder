@@ -19,7 +19,7 @@ class App extends Component {
 
     return (
       <div>
-        <DirectoryBar path={path} onSetPath={actions.updateTree} />
+        <DirectoryBar path={path} onSetPath={actions.updateTree} onBack={actions.rewindTree}/>
 
         <div className="Additional">
           <SliderInput onUpdate={actions.setMinSize} value={minSize}/>

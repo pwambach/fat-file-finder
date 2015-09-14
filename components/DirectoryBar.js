@@ -39,16 +39,16 @@ class DirectoryBar extends Component {
   }
 
   handleBack(){
-    console.log("back");
+    this.props.onBack();
   }
 
   render() {
     const { onSetPath } = this.props;
     return (
       <div className="DirectoryBar">
-        <button className="BackButton" onClick={this.handleBack}>-</button>
+        <button className="BackButton" onClick={this.handleBack.bind(this)}>-</button>
         <button className="DialogButton" onClick={this.handleDialog}>...</button>
-        <input type="text" value={this.state.path} onChange={this.handleChange.bind(this)} onKeyDown={this.handleEnter.bind(this)} />
+        <input type="text" value={this.state.path} onChange={this.handleChange.bind(this)} onKeyDown={this.handleEnter.bind(this)} placeholder="Select a directory"/>
         <button className="OkButton" onClick={this.handleClick.bind(this)}>Go</button>
       </div>
     );
@@ -57,7 +57,8 @@ class DirectoryBar extends Component {
 
 DirectoryBar.propTypes = {
   path: PropTypes.string.isRequired,
-  onSetPath: PropTypes.func.isRequired
+  onSetPath: PropTypes.func.isRequired,
+  onBack: PropTypes.func.isRequired
 };
 
 
