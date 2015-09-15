@@ -7,15 +7,8 @@ module.exports = function promiseWalk(path, callback, progressStep = 100) {
   let callbackValid = typeof callback === 'function';
 
   walker(path)
-    // .on('dir', (entry, stat) => {
-    //   entries.push({
-    //     path: entry,
-    //     size: 0,
-    //     dir: true
-    //   });
-    // })
     .on('file', (entry, stat) => {
-      //if(stat.size > 1024*1024){
+      if(stat.size > 1024*1024){
         entries.push({
           path: entry,
           size: stat.size,
@@ -27,10 +20,16 @@ module.exports = function promiseWalk(path, callback, progressStep = 100) {
             callback(entries.length);
           }
         }
-      //}
+      }
     })
-    .on('error', (error, entry, stat) => deferred.reject(error, entry, stat))
-    .on('end', () => deferred.resolve(entries));
+    .on('error', (error, entry, stat) => {
+      deferred.reject(error, entry, stat);
+    })
+    .on('end', () => {
+      deferred.resolve(entries);
+    }
+    );
+
 
   return deferred.promise;
 };
