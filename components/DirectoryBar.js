@@ -43,12 +43,18 @@ class DirectoryBar extends Component {
   }
 
   render() {
-    const { onSetPath, loading } = this.props;
+    const { onSetPath, loading, error } = this.props;
     return (
       <div className="DirectoryBar">
         <button className="BackButton" onClick={this.handleBack.bind(this)}><i className="fa fa-arrow-left"></i></button>
         <button className="DialogButton" onClick={this.handleDialog}><i className="fa fa-search"></i></button>
-        <input type="text" value={this.state.path} onChange={this.handleChange.bind(this)} onKeyDown={this.handleEnter.bind(this)} placeholder="Select a directory"/>
+        <input
+          type="text"
+          className={error ? 'hasError' : null}
+          value={this.state.path}
+          onChange={this.handleChange.bind(this)}
+          onKeyDown={this.handleEnter.bind(this)}
+          placeholder="Select a directory"/>
         <button className="OkButton" onClick={this.handleClick.bind(this)}>
           {loading ? (<i className="fa fa-cog fa-spin"></i>) : (<i className="fa fa-arrow-right"></i>)}
         </button>
@@ -58,9 +64,11 @@ class DirectoryBar extends Component {
 }
 
 DirectoryBar.propTypes = {
+  path: PropTypes.string,
   onSetPath: PropTypes.func.isRequired,
   onBack: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired
 };
 
 

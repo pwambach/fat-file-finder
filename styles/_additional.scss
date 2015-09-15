@@ -29,6 +29,11 @@
     color: lighten($gray-font-color, 20);
   }
 
+  .ErrorMessage {
+    float:right;
+    color: darken(red, 5);
+  }
+
 
   @media (max-width: 550px) {
     .FileCount, .ShowingFileCount {
