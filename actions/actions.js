@@ -35,7 +35,11 @@ function getFilesAsync(dispatch, path){
 }
 
 export function updateTree(path) {
-  return function(dispatch){
+  return function(dispatch, getState){
+    //do nothing if the path did not change
+    if(path === getState().directory.path){
+      return false;
+    }
     return getFilesAsync(dispatch, path);
   }
 }
