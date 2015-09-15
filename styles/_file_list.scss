@@ -33,6 +33,7 @@
         height: 30px;
         width: 30px;
         text-align: center;
+        transition: background-color 0.1s ease-out;
 
         i {
           position: relative;
@@ -51,7 +52,7 @@
 
       .DirectoryName {
         display: none;
-        color: #777;
+        color: rgb(50, 98, 109);
         text-decoration: underline;
         margin-top: 4px;
         cursor: pointer;
@@ -85,11 +86,15 @@
     }
 
     &:hover {
+
+      .FileIcon > div {
+        background-color: lighten($primaryColor, 30);
+      }
       .FileName {
         overflow: initial;
 
         .DirectoryName {
-          display: block !important;
+          display: block;
         }
       }
 
