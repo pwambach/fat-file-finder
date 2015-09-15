@@ -1,7 +1,8 @@
 import React, { PropTypes, Component } from 'react';
+import PureComponent from 'react-pure-render/component';
 var pathNpm = electronRequire('path');
 
-class FileItem extends Component {
+class FileItem extends PureComponent {
 
   handleDirectoryClick(path, e) {
     e.preventDefault();

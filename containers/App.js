@@ -8,8 +8,6 @@ import FileCount from '../components/FileCount';
 import FileTable from '../components/FileTable';
 
 
-
-
 class App extends Component {
 
   render() {

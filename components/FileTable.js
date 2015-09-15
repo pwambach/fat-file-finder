@@ -1,8 +1,9 @@
 import React, { PropTypes, Component } from 'react';
 import FileItem from '../components/FileItem';
+import PureComponent from 'react-pure-render/component';
 var filesize = require('filesize');
 
-class FileTable extends Component {
+class FileTable extends PureComponent {
 
   render() {
     const { files, actions } = this.props;

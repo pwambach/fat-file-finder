@@ -1,19 +1,12 @@
 import React, { PropTypes, Component } from 'react';
-import { emitter } from '../emitters/emitter';
+import PureComponent from 'react-pure-render/component';
 
-
-class FileCount extends Component {
-
-  constructor() {
-    super(arguments);
-    this.state = {};
-    emitter.addListener('updateLoadedFiles', (count) => this.setState({ count: count }));
-  }
+class FileCount extends PureComponent {
 
   render() {
     const { count, loading, loadedFiles } = this.props;
     return (
-      <span className="FileCount">Found: <b>{ !loading ? count : this.state.count } </b> {count === 1 ? 'File' : 'Files'}</span>
+      <span className="FileCount">Found: <b>{ !loading ? count : loadedFiles } </b> {count === 1 ? 'File' : 'Files'}</span>
     );
   }
 }
