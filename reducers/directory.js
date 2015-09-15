@@ -5,6 +5,7 @@ const initialState = {
   path: null,
   minSize: 50*1024*1024,
   loading: false,
+  loadedFiles: 0,
   files: []
 };
 
@@ -18,7 +19,7 @@ export default function directory(state = initialState, action) {
       } else {
         lastPaths = [...state.lastPaths, state.path];
       }
-      return Object.assign({}, state, {loading: true, path: action.path, lastPaths: lastPaths});
+      return Object.assign({}, state, {loading: true, loadedFiles: 0, path: action.path, lastPaths: lastPaths});
 
     case types.SUCCESS_WALK_TREE:
       return Object.assign({}, state, {loading: false, files: action.files});
@@ -27,8 +28,12 @@ export default function directory(state = initialState, action) {
       console.error(action.error);
       return Object.assign({}, state, {loading: false});
 
+    case types.PROGRESS_WALK_TREE:
+      return Object.assign({}, state, {loadedFiles: action.loadedFiles});
+
     case types.SET_MIN_SIZE:
       return Object.assign({}, state, {minSize: action.minSize});
+
 
   default:
     return state;

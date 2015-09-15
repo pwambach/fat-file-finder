@@ -7,7 +7,7 @@ import { devTools, persistState } from 'redux-devtools';
 export default function configureStore(initialState) {
 
   const createStoreWithMiddlewareAndDevTools = compose(
-    applyMiddleware(thunkMiddleware, loggerMiddleware),
+    applyMiddleware(thunkMiddleware/*, loggerMiddleware*/),
     devTools(),
     persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/))
   )(createStore);

@@ -13,7 +13,7 @@ import FileTable from '../components/FileTable';
 class App extends Component {
 
   render() {
-    const { path, files, minSize, loading, dispatch } = this.props;
+    const { path, files, minSize, loading, loadedFiles, dispatch } = this.props;
     const actions = bindActionCreators(Actions, dispatch);
     const filteredFiles = files.filter( (file, index) => file.size > minSize && index < 100);
 
@@ -23,12 +23,12 @@ class App extends Component {
 
         <div className="Additional">
           <SliderInput onUpdate={actions.setMinSize} value={minSize}/>
-          <FileCount count={files.length}/>
           <span className="ShowingFileCount"> (Showing: {filteredFiles.length})</span>
+          <FileCount count={files.length} loading={loading} loadedFiles={loadedFiles}/>
         </div>
 
         <FileTable files={filteredFiles} actions={actions}/>
-        
+
       </div>
     );
   }
@@ -44,7 +44,8 @@ function transformState(state) {
     path: state.directory.path,
     files: state.directory.files,
     minSize: state.directory.minSize,
-    loading: state.directory.loading
+    loading: state.directory.loading,
+    loadedFiles: state.directory.loadedFiles
   };
 }
 
