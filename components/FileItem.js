@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
 import PureComponent from 'react-pure-render/component';
+import FileIcon from './FileIcon';
 var pathNpm = electronRequire('path');
 
 class FileItem extends PureComponent {
@@ -14,8 +15,8 @@ class FileItem extends PureComponent {
     const style = {width: relativeSize + '%'};
     return (
       <tr className="FileItem">
-        <td className="FileType">
-          <div>{pathNpm.extname(path)}</div>
+        <td className="FileIcon">
+          <FileIcon type={pathNpm.extname(path)}/>
         </td>
         <td className="FileName">
           {pathNpm.basename(path)}
