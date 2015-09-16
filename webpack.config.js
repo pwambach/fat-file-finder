@@ -11,44 +11,27 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'static'),
     filename: 'bundle.js',
-    publicPath: '/static/'
+    publicPath: 'static/'
   },
   plugins: [
     //new webpack.HotModuleReplacementPlugin(),
     new webpack.IgnorePlugin(new RegExp("^(dialog|path|fs|ipc|path)$"))
   ],
   module: {
-    loaders: [{
-      test: /\.js?$/,
-      loaders: ['babel'],
-      exclude: /node_modules/,
-      include: __dirname
-    }, {
-      test: /\.scss?$/,
-      loaders: ['style', 'css', 'sass'],
-      exclude: /node_modules/,
-      include: __dirname
-    },
-    {
-      test: /\.css?$/,
-      loaders: ['style', 'css'],
-      include: __dirname
-    },
-    {
-      test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-      loader: "url?limit=10000&mimetype=application/font-woff"
-    }, {
-      test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-      loader: "url?limit=10000&mimetype=application/font-woff"
-    }, {
-      test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-      loader: "url?limit=10000&mimetype=application/octet-stream"
-    }, {
-      test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-      loader: "file"
-    }, {
-      test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-      loader: "url?limit=10000&mimetype=image/svg+xml"
-    }]
+    loaders: [
+      {
+        test: /\.js?$/,
+        loaders: ['babel'],
+        exclude: /node_modules/,
+        include: __dirname
+      }, {
+        test: /\.scss?$/,
+        loaders: ['style', 'css', 'sass'],
+        include: __dirname,
+        exclude: /node_modules\/[^font]/
+      },
+      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=100&minetype=application/font-woff" },
+      { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
+    ]
   }
 };
