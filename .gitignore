@@ -1,3 +1,8 @@
 node_modules
 dist
 .DS_Store
+static/*.ttf
+static/*.woff2
+static/*.woff
+static/*.eot
+static/*.svg
