@@ -14,11 +14,20 @@
       display: inline-block;
       min-width: 48px;
     }
+
+    span {
+      cursor: default;
+    }
   }
 
   .FileCount, .ShowingFileCount {
     text-align: right;
     float:right;
+
+    span {
+      cursor: default;
+    }
+
   }
 
   .FileCount {

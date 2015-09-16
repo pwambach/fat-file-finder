@@ -18,6 +18,7 @@ $button-width: 70px;
 
 * {
   box-sizing: border-box;
+  -webkit-user-select: none;
 }
 
 body {

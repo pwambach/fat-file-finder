@@ -1,9 +1,9 @@
 var app = require('app');
 var BrowserWindow = require('browser-window');
-var mainWindow = null;
-
 var ipc = require('ipc');
 var dialog = require('dialog');
+var mainWindow = null;
+
 
 
 // Quit when all windows are closed.

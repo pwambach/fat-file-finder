@@ -49,8 +49,10 @@
       overflow: hidden;
       text-overflow: ellipsis;
       padding-right: 40px;
+      cursor: default;
 
       .DirectoryName {
+        cursor: pointer;
         display: none;
         color: rgb(50, 98, 109);
         text-decoration: underline;

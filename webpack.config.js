@@ -6,7 +6,7 @@ module.exports = {
   entry: [
     //'webpack-dev-server/client?http://0.0.0.0:3000', // WebpackDevServer host and port
     //'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
-    './index'
+    './src/index'
   ],
   output: {
     path: path.join(__dirname, 'static'),
@@ -15,7 +15,7 @@ module.exports = {
   },
   plugins: [
     //new webpack.HotModuleReplacementPlugin(),
-    new webpack.IgnorePlugin(new RegExp("^(dialog|path|fs|ipc|path)$"))
+    //new webpack.IgnorePlugin(new RegExp("^(fs|path)$"))
   ],
   module: {
     loaders: [
@@ -30,7 +30,7 @@ module.exports = {
         include: __dirname,
         exclude: /node_modules\/[^font]/
       },
-      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=100&minetype=application/font-woff" },
+      { test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&minetype=application/font-woff" },
       { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" }
     ]
   }

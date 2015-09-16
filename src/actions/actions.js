@@ -1,5 +1,4 @@
 import * as types from '../constants/ActionTypes';
-import { emitter } from '../emitters/emitter';
 var promiseWalk = require ('../utils/PromiseWalker');
 
 function startWalkTree(path) {
