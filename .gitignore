@@ -1,5 +1,6 @@
 node_modules
 dist
+FatFileFinder-*
 .DS_Store
 static/*.ttf
 static/*.woff2
