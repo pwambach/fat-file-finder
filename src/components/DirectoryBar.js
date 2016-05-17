@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react';
-var ipc = electronRequire('ipc');
+import {ipcRenderer} from  'electron';
+
 
 class DirectoryBar extends Component {
 
@@ -9,7 +10,7 @@ class DirectoryBar extends Component {
       path: this.props.path || ''
     };
 
-    ipc.on('open-dir-dialog-reply', function(dirPath) {
+    ipcRenderer.on('open-dir-dialog-reply', function(dirPath) {
       if(dirPath){
         props.onSetPath(dirPath[0]);
       }
@@ -35,7 +36,7 @@ class DirectoryBar extends Component {
   }
 
   handleDialog(){
-    ipc.send('open-dir-dialog');
+    ipcRenderer.send('open-dir-dialog');
   }
 
   handleBack(){
