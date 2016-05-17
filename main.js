@@ -1,10 +1,11 @@
-var app = require('app');
-var BrowserWindow = require('browser-window');
-var ipc = require('ipc');
-var dialog = require('dialog');
-var mainWindow = null;
+'use strict';
 
-
+const electron = require('electron');
+const app = electron.app;
+const BrowserWindow = electron.BrowserWindow;
+const ipc = electron.ipcMain;
+var dialog = electron.dialog;
+let mainWindow
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
@@ -15,20 +16,16 @@ app.on('window-all-closed', function() {
   }
 });
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-app.on('ready', function() {
-
-
+var startApplication = function startApplication(){
   // Create the browser window.
   mainWindow = new BrowserWindow({width: 800, height: 600});
 
   // and load the index.html of the app.
-  mainWindow.loadUrl('file://' + __dirname + '/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/index.html');
   //mainWindow.loadUrl('http://localhost:3000');
 
   // Open the DevTools.
-  // mainWindow.openDevTools();
+  mainWindow.openDevTools();
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
@@ -42,4 +39,8 @@ app.on('ready', function() {
     var dirPath = dialog.showOpenDialog(mainWindow, { properties: [ 'openDirectory', 'multiSelections' ]})
     event.sender.send('open-dir-dialog-reply', dirPath);
   });
-});
+};
+
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+app.on('ready', startApplication);
