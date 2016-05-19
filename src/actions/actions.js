@@ -1,5 +1,5 @@
 import * as types from '../constants/ActionTypes';
-var promiseWalk = require ('../utils/PromiseWalker');
+var directoryWalk = require ('../utils/DirectoryWalker');
 
 function startWalkTree(path) {
   return { type: types.START_WALK_TREE, path };
@@ -26,7 +26,7 @@ function progressWalkTree(count) {
 function getFilesAsync(dispatch, path){
   dispatch(startWalkTree(path));
 
-  return promiseWalk(path, (count) => dispatch(progressWalkTree(count)), 100)
+  return directoryWalk(path, (count) => dispatch(progressWalkTree(count)), 100)
     .then(
       files => dispatch(successWalkTree(files)),
       error => dispatch(errorWalkTree(error))
