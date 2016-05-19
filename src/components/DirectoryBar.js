@@ -10,7 +10,7 @@ class DirectoryBar extends Component {
       path: this.props.path || ''
     };
 
-    ipcRenderer.on('open-dir-dialog-reply', function(dirPath) {
+    ipcRenderer.on('open-dir-dialog-reply', (event, dirPath) => {
       if(dirPath){
         props.onSetPath(dirPath[0]);
       }
