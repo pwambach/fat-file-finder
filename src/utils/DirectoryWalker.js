@@ -1,4 +1,3 @@
-var Promise = require('bluebird');
 var walker = electronRequire('walker');
 
 module.exports = function directoryWalk(path, callback, progressStep = 100) {
