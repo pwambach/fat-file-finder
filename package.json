@@ -4,7 +4,8 @@
   "description": "A electron app to find large files on your machine",
   "main": "main.js",
   "scripts": {
-    "start": "node server.js"
+    "server": "node server.js",
+    "start": "electron ."
   },
   "license": "MIT",
   "dependencies": {
