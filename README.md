@@ -12,5 +12,12 @@ For performance reasons FatFileFinder currently ignores files smaller than 1 MB 
 
 [FatFileFinder-0.1.0.zip](https://github.com/pwambach/fat-file-finder/releases/download/0.1.0/FatFileFinder-0.1.0.zip)
 
+# Build it on your own
+
+1. ´´´git clone https://github.com/pwambach/fat-file-finder.git && cd fat-file-finder´´
+2. ´´´npm install´´´
+3. ´´´webpack´´´
+4. ´´electron .´´´
+
 # License
 MIT

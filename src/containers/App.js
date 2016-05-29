@@ -25,7 +25,7 @@ class App extends Component {
           { error ?
             <div className="ErrorMessage">Directory not found</div> :
             <span>
-              <span className="ShowingFileCount"> (Showing: {filteredFiles.length})</span>
+              <span className="ShowingFileCount"> (Showing: {filteredFiles.length}, Filtered: {files.length - filteredFiles.length}) </span>
               <FileCount count={files.length} loading={loading} loadedFiles={loadedFiles}/>
             </span>
           }
