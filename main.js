@@ -1,10 +1,8 @@
 'use strict';
 
 const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-const ipc = electron.ipcMain;
-var dialog = electron.dialog;
+const {app, BrowserWindow, ipcMain: ipc, dialog}  = electron;
+
 let mainWindow
 
 // Quit when all windows are closed.
