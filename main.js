@@ -37,6 +37,10 @@ var startApplication = function startApplication(){
     var dirPath = dialog.showOpenDialog(mainWindow, { properties: [ 'openDirectory', 'multiSelections' ]})
     event.sender.send('open-dir-dialog-reply', dirPath);
   });
+
+  ipc.on('open-finder', function(event, arg) {
+    shell.showItemInFolder(arg.path)
+  });
 };
 
 // This method will be called when Electron has finished
