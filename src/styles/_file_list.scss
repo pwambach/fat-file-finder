@@ -91,6 +91,7 @@
 
       .FileIcon > div {
         background-color: lighten($primaryColor, 30);
+        cursor: pointer;
       }
       .FileName {
         overflow: initial;

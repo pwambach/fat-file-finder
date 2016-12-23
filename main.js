@@ -1,7 +1,7 @@
 'use strict';
 
 const electron = require('electron');
-const {app, BrowserWindow, ipcMain: ipc, dialog}  = electron;
+const {app, BrowserWindow, ipcMain: ipc, dialog, shell}  = electron;
 
 let mainWindow
 
