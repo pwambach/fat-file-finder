@@ -1,17 +1,21 @@
 import React, { PropTypes, Component } from 'react';
 import PureComponent from 'react-pure-render/component';
 import fileIconMap from '../constants/FileIconMapping';
+import {ipcRenderer} from  'electron';
 
 class FileIcon extends PureComponent {
 
 
+  openFinder(path){
+    ipcRenderer.send('open-finder', {path});
+  }
 
   render() {
-    const { type } = this.props;
+    const { type, path } = this.props;
     const iconClassName = 'fa '.concat(fileIconMap[type] || 'fa-file-o');
 
     return (
-      <div>
+      <div onClick={this.openFinder.bind(this, path)}>
         <i className={iconClassName}></i>
       </div>
     );
@@ -20,8 +24,8 @@ class FileIcon extends PureComponent {
 }
 
 FileIcon.propTypes = {
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired
 };
-
 
 export default FileIcon;

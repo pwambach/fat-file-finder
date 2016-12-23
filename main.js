@@ -1,10 +1,8 @@
 'use strict';
 
 const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-const ipc = electron.ipcMain;
-var dialog = electron.dialog;
+const {app, BrowserWindow, ipcMain: ipc, dialog, shell}  = electron;
+
 let mainWindow
 
 // Quit when all windows are closed.
@@ -38,6 +36,10 @@ var startApplication = function startApplication(){
   ipc.on('open-dir-dialog', function(event, arg) {
     var dirPath = dialog.showOpenDialog(mainWindow, { properties: [ 'openDirectory', 'multiSelections' ]})
     event.sender.send('open-dir-dialog-reply', dirPath);
+  });
+
+  ipc.on('open-finder', function(event, arg) {
+    shell.showItemInFolder(arg.path)
   });
 };
 

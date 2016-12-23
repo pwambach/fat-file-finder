@@ -16,7 +16,7 @@ class FileItem extends PureComponent {
     return (
       <tr className="FileItem">
         <td className="FileIcon">
-          <FileIcon type={pathNpm.extname(path)}/>
+          <FileIcon type={pathNpm.extname(path)} path={path}/>
         </td>
         <td className="FileName">
           {pathNpm.basename(path)}
